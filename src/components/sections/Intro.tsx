@@ -10,7 +10,6 @@ interface IntroFields {
 const Intro = async () => {
     const response = await client.getEntries({ content_type: "intro" });
     const items = response.items as any[];
-    console.log("Intro content:", items);
 
     if (!items.length) return null; 
 

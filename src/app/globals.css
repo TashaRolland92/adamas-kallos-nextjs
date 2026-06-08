@@ -1,19 +1,43 @@
 @import "tailwindcss";
 
+@theme {
+  --font-playfair: "Playfair Display";
+  --font-lato: "Lato", sans-serif;
+
+  --color-primaryContent: #0E4148;
+  --color-babyblue: #e4f4f3;
+  --color-aquamarine: #a1dbf1;
+  --color-tiffanyblue: #71d5e4;
+  --color-bluegreen: #00b6bc;
+
+  --line-height-12: 3.5rem;
+  --line-height-13: 4rem;
+  --line-height-14: 4.5rem;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0E4148;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-playfair: var(--font-playfair);
-  --font-lato: var(--font-lato);
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-lato);
+  font-family: var(--font-lato), sans-serif;
+}
+
+@layer utilities {
+  .playfair { font-family: var(--font-playfair), serif; font-weight: 400; }
+  .playfair-500 { font-family: var(--font-playfair), serif; font-weight: 500; }
+  .playfair-600 { font-family: var(--font-playfair), serif; font-weight: 600; }
+  .playfair-700 { font-family: var(--font-playfair), serif; font-weight: 700; }
+  .playfair-800 { font-family: var(--font-playfair), serif; font-weight: 800; }
+  .playfair-900 { font-family: var(--font-playfair), serif; font-weight: 900; }
+  .playfair-italic-400 { font-family: var(--font-playfair), serif; font-weight: 400; font-style: italic; }
+  .playfair-italic-700 { font-family: var(--font-playfair), serif; font-weight: 700; font-style: italic; }
+  .playfair-italic-900 { font-family: var(--font-playfair), serif; font-weight: 900; font-style: italic; }
+  .lato { font-family: var(--font-lato), sans-serif; font-weight: 400; }
+  .lato-700 { font-family: var(--font-lato), sans-serif; font-weight: 700; }
+  .lato-italic-400 { font-family: var(--font-lato), sans-serif; font-weight: 400; font-style: italic; }
+  .lato-italic-700 { font-family: var(--font-lato), sans-serif; font-weight: 700; font-style: italic; }
 }
