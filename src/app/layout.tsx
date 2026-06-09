@@ -4,32 +4,34 @@ import "./globals.css";
 import Nav from "@/components/layout/Nav";
 
 const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
+	variable: "--font-playfair",
+	subsets: ["latin"],
+	style: ["normal", "italic"],
+	weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const lato = Lato({
-  variable: "--font-lato",
-  weight: ["400", "700"],
-  subsets: ["latin"],
+	variable: "--font-lato",
+	weight: ["400", "700"],
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Adamas Kallos",
-  description: "Luxury beauty treatments",
+	title: "Adamas Kallos",
+	description: "Luxury beauty treatments",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className={`${playfair.variable} ${lato.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <Nav />
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" className={`${playfair.variable} ${lato.variable} h-full antialiased`}>
+			<body className="min-h-full flex flex-col">
+				<Nav />
+				{children}
+			</body>
+		</html>
+	);
 }
