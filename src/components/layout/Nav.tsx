@@ -38,9 +38,22 @@ export default function Nav() {
     }
 
     return (
-        <nav className="playfair-600 text-lg w-full absolute top-0 left-0 right-0 h-20 z-20 border-b border-babyblue">
+        <nav 
+            className={`
+                playfair-600 
+                text-lg 
+                w-full 
+                fixed 
+                top-0 
+                left-0 
+                right-0 
+                h-20 
+                z-20                 
+                bg-tiffanyblue/90                
+            `}
+        >
             <div className="flex items-center justify-between container mx-auto px-7 h-full">
-                <h1 className="playfair-italic-700 text-2xl text-white">
+                <h1 className="playfair-italic-700 text-2xl text-primaryContent">
                     <Link href="/">Logo goes here</Link>
                 </h1>
 
@@ -49,7 +62,7 @@ export default function Nav() {
                     {navItems.map((item) => (
                         <li
                             key={item.sys.id}
-                            className="relative text-white text-xl"
+                            className="relative text-primaryContent text-xl"
                             onMouseEnter={() => {
                                 setHoveredDropdown(item.sys.id);
                                 const firstDropdownImage = item.fields.dropdownItems?.[0]?.fields?.imageUrl?.fields?.file?.url;
@@ -75,23 +88,23 @@ export default function Nav() {
                                     fixed
                                     left-0
                                     right-0
-                                    bg-babyblue/80
+                                    bg-tiffanyblue/90
                                     text-primaryContent
                                     shadow-lg
                                     transition-all
                                     duration-500
                                     ease-in-out
-                                    overflow-hidden
-                                    ${hoveredDropdown === item.sys.id ? "max-h-[500px]" : "max-h-0"}
+                                    overflow-hidden 
+                                    ${hoveredDropdown === item.sys.id ? "max-h-500" : "max-h-0"}
                                 `}>
                                     <div className="container mx-auto px-7 py-10 grid grid-cols-3 gap-x-2.5">
                                         <div className="submenu w-full">
                                             <ul>
                                                 {item.fields.dropdownItems.map((dropdownItem) => (
                                                     <li
-                                                        key={dropdownItem.sys.id}
-                                                        className="mb-2.5"
-                                                        onMouseEnter={() => {
+                                                    key={dropdownItem.sys.id}
+                                                    className="mb-2.5"
+                                                    onMouseEnter={() => {
                                                             const imgUrl = dropdownItem.fields?.imageUrl?.fields?.file?.url;
                                                             if (imgUrl) setHoveredImage(`https:${imgUrl}`);
                                                         }}
@@ -122,9 +135,9 @@ export default function Nav() {
 
                 {/* Mobile Menu Button */}
                 <button type="button" title="Mobile Menu Button" onClick={toggleMobileMenu} className="lg:hidden flex flex-col justify-between w-8 h-6 relative z-30 cursor-pointer">
-                    <div className={`h-1 w-full transition-transform duration-500 ${mobileOpen ? "bg-primaryContent rotate-45 translate-y-2.5" : "bg-white"}`}></div>
-                    <div className={`h-1 w-full transition-opacity duration-500 ${mobileOpen ? "bg-primaryContent opacity-0" : "bg-white"}`}></div>
-                    <div className={`h-1 w-full transition-transform duration-500 ${mobileOpen ? "bg-primaryContent -rotate-45 -translate-y-2.5" : "bg-white"}`}></div>
+                    <div className={`h-1 w-full transition-transform duration-500 ${mobileOpen ? "bg-primaryContent rotate-45 translate-y-2.5" : "bg-primaryContent"}`}></div>
+                    <div className={`h-1 w-full transition-opacity duration-500 ${mobileOpen ? "bg-primaryContent opacity-0" : "bg-primaryContent"}`}></div>
+                    <div className={`h-1 w-full transition-transform duration-500 ${mobileOpen ? "bg-primaryContent -rotate-45 -translate-y-2.5" : "bg-primaryContent"}`}></div>
                 </button>
             </div>
 
@@ -161,19 +174,19 @@ export default function Nav() {
                             </div>
                             {item.fields.dropdownItems && (
                                 <ul className={`
-                                    ml-4 transition-all duration-500 ease-in-out overflow-hidden
-                                    ${mobileDropdown === item.sys.id ? "max-h-[500px]" : "max-h-0"}
+                                    playfair-700 text-lg mb-2.5 capitalize transition-all duration-500 ease-in-out overflow-hidden
+                                    ${mobileDropdown === item.sys.id ? "max-h-500" : "max-h-0"}
                                 `}>
                                     {item.fields.dropdownItems.map((submenuItem) => (
-                                        <li key={submenuItem.sys.id}>
-                                            <Link href={submenuItem.fields.slug || "/"} onClick={toggleMobileMenu} className="block">
+                                        <li key={submenuItem.sys.id} className="ml-5">
+                                            <Link href={submenuItem.fields.slug || "/"} onClick={toggleMobileMenu} className="inline-block hover:underline">
                                                 {submenuItem.fields.title}
                                             </Link>
                                         </li>
                                     ))}
                                 </ul>
                             )}
-                            <div className={`border border-primaryContent transition-all duration-[2000ms] ${mobileOpen ? "w-full" : "w-0"}`}></div>
+                            <div className={`border border-primaryContent transition-all duration-2000ms ${mobileOpen ? "w-full" : "w-0"}`}></div>
                         </li>
                     ))}
                 </ul>
