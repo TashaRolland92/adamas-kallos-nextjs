@@ -15,13 +15,13 @@ const Intro = async () => {
 
     return ( 
         <section className="intro bg-babyblue"> 
-            <div className="container mx-auto px-7 py-12">
+            <div className="container mx-auto px-8 py-12">
                 {items.map((item) => {
                     const fields = item.fields as IntroFields;
                     return (
                         <div key={item.sys.id} className="grid md:grid-cols-2 gap-5">
                             <div className="col">
-                                <h3 className="uppercase text-primaryContent playfair text-2xl md:text-xl pb-4">
+                                <h3 className="uppercase text-primaryContent playfair text-2xl pb-4">
                                     {fields.heading}
                                 </h3>
                                 <h3 className="playfair-italic-700 text-tiffanyblue text-3xl leading-10 md:text-5xl md:leading-12">

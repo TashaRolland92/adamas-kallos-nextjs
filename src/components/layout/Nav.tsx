@@ -48,8 +48,10 @@ export default function Nav() {
                 left-0 
                 right-0 
                 h-20 
-                z-20                 
-                bg-tiffanyblue/90                
+                z-20             
+                border-b
+                border-tiffanyBlue
+                bg-babyblue                
             `}
         >
             <div className="flex items-center justify-between container mx-auto px-7 h-full">
@@ -88,7 +90,7 @@ export default function Nav() {
                                     fixed
                                     left-0
                                     right-0
-                                    bg-tiffanyblue/90
+                                    bg-babyblue
                                     text-primaryContent
                                     shadow-lg
                                     transition-all
@@ -117,12 +119,13 @@ export default function Nav() {
                                             </ul>
                                         </div>                                    
                                         {hoveredImage && (
-                                            <div className="col-span-1 col-start-3 w-full h-full relative">
+                                            <div className="col-span-1 col-start-3 w-full">
                                                 <Image
                                                     src={hoveredImage}
                                                     alt="Image related alt goes here"
-                                                    fill
-                                                    className="object-cover"
+                                                    width={400}
+                                                    height={260}
+                                                    className="w-full h-64 object-cover"
                                                 />
                                             </div>
                                         )}
