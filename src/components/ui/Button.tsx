@@ -22,13 +22,14 @@ const Button = ({
 		playfair-600
 		border
 		border-white
-		px-2
-		h-10
-		w-full
-		max-w-36
+		px-4
+		h-[45px]
 		uppercase
 		transition-colors
 		ease-in
+        text-lg
+        inline-grid
+        items-center
 		hover:bg-white
 		hover:text-primaryContent
 	`;
