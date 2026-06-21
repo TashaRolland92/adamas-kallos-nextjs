@@ -35,7 +35,7 @@ export default function SubCategoryList({ categoryId, onSelectSubcategory }: Sub
 
     return (
         <div className="border border-bluegreen p-6">
-            <h4 className="playfair-italic-700 text-2xl mb-6">Select a subcategory:</h4>
+            <h4 className="playfair-italic-700 text-2xl mb-6 text-primaryContent">Select a subcategory:</h4>
             {loading ? (
                 <p className="playfair text-primaryContent">Loading...</p>
             ) : (
@@ -43,7 +43,7 @@ export default function SubCategoryList({ categoryId, onSelectSubcategory }: Sub
                     {subcategories.map((sub) => (
                         <li
                             key={sub.id}
-                            className="border border-bluegreen p-4 cursor-pointer hover:text-bluegreen transition-colors duration-200"
+                            className="border border-bluegreen p-4 cursor-pointer hover:bg-babyblue transition-colors duration-200"
                             onClick={() => onSelectSubcategory(sub.id)}
                         >
                             <p className="playfair-700 uppercase">{sub.name}</p>

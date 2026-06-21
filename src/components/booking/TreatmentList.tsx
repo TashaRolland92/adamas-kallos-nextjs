@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Button from "../ui/Button";
 
 type Treatment = {
     id: number;
@@ -20,6 +21,7 @@ type TreatmentListProps = {
 export default function TreatmentList({ categoryId, subcategoryId }: TreatmentListProps) {
     const [treatments, setTreatments] = useState<Treatment[]>([]);
     const [loading, setLoading] = useState(false);
+    const [selectedTreatmentId, setSelectedTreatmentId] = useState<number | null>(null);
 
     useEffect(() => {
         if (!categoryId) return;
@@ -43,22 +45,62 @@ export default function TreatmentList({ categoryId, subcategoryId }: TreatmentLi
     }, [categoryId, subcategoryId]);
 
     return (
-        <div className="border border-bluegreen p-6">
-            <h4 className="playfair-italic-700 text-2xl mb-6">Select a treatment:</h4>
-            {loading ? (
-                <p className="playfair text-primaryContent">Loading...</p>
-            ) : (
-                <ul className="grid grid-cols-3 gap-4">
-                    {treatments.map((treatment) => (
-                        <li key={treatment.id} className="border border-bluegreen p-4">
-                            <h5 className="playfair-700 text-lg mb-2">{treatment.name}</h5>
-                            <p className="playfair text-md text-primaryContent mb-3">{treatment.description}</p>
-                            <p className="playfair-600 text-lg text-bluegreen">£{treatment.price}</p>
-                            <p className="playfair text-sm text-primaryContent">{treatment.duration} minutes</p>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+        <>
+            <div className="border border-bluegreen p-6">
+                <h4 className="playfair-italic-700 text-2xl mb-6 text-primaryContent">Select a treatment:</h4>
+                {loading ? (
+                    <p className="playfair text-primaryContent">Loading...</p>
+                ) : (
+                    <ul className="grid grid-cols-3 gap-4">
+                        {treatments.map((treatment) => (
+                            <li 
+                                key={treatment.id} 
+                                onClick={() => setSelectedTreatmentId(
+                                    selectedTreatmentId === treatment.id ? null : treatment.id
+                                )}
+                                className={`
+                                    cursor-pointer 
+                                    p-4 
+                                    border 
+                                    transition-colors 
+                                    duration-200
+                                    flex justify-between items-start
+                                    ${selectedTreatmentId === treatment.id 
+                                        ? "border-bluegreen bg-babyblue"
+                                        : "border-bluegreen hover:bg-babyblue"
+                                    }
+                                `}
+                            >
+                                <div>
+                                    <h5 className="playfair-700 text-lg mb-2">{treatment.name}</h5>
+                                    <p className="playfair text-md text-primaryContent mb-3">{treatment.description}</p>
+                                    <p className="playfair-600 text-lg text-bluegreen">£{treatment.price}</p>
+                                    <p className="playfair text-sm text-primaryContent">{treatment.duration} minutes</p>
+                                </div>
+                                <div
+                                    aria-label={selectedTreatmentId === treatment.id ? "Selected" : "Not Selected"} 
+                                    className={`mt-1 w-5 h-5 rounded-full border shrink-0 transition-colors duration-200
+                                    ${selectedTreatmentId === treatment.id
+                                        ? "border-bluegreen bg-bluegreen"
+                                        : "border-primaryContent bg-transparent"
+                                    }`}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            {selectedTreatmentId && (
+                <div className="mt-4 flex justify-end">
+                    <Button
+                        variant="blueGreen"             
+                        className="min-w-[150]"
+                    >
+                        Book
+                    </Button>                    
+                </div>
+            )} 
+        </>       
     );
 }

@@ -90,25 +90,27 @@ export default function TreatmentCategories() {
 
     return (
         <div className="booking-container">
-            {state.step !== "category" && (
-                <Button
-                    onClick={() => dispatch({ type: "GO_BACK" })}
-                    variant="blueGreen"
-                    className="mb-4"
-                >
-                    ← Back
-                </Button>
-            )}
+            <div className="flex justify-between mb-4">
+                {state.step !== "category" && (
+                    <Button
+                        onClick={() => dispatch({ type: "GO_BACK" })}
+                        variant="blueGreen"
+                        className="min-w-[150]"
+                    >
+                        Back
+                    </Button>
+                )}
 
-            {state.step !== "category" && (
-                <Button
-                    onClick={() => dispatch({ type: "RESET" })}
-                    variant="blueGreen"
-                    className="ml-4 mb-4"
-                >
-                    ← Start Again
-                </Button>
-            )}
+                {state.step !== "category" && (
+                    <Button
+                        onClick={() => dispatch({ type: "RESET" })}
+                        variant="blueGreen"
+                        className="min-w-[150]"
+                    >
+                        Start Again
+                    </Button>
+                )}
+            </div>
 
             {state.step === "category" && (
                 <CategoryList
