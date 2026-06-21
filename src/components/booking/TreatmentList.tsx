@@ -43,17 +43,17 @@ export default function TreatmentList({ categoryId, subcategoryId }: TreatmentLi
     }, [categoryId, subcategoryId]);
 
     return (
-        <div>
-            <h3 className="playfair-600 uppercase text-xl mb-4">Select a treatment</h3>
+        <div className="border border-bluegreen p-6">
+            <h4 className="playfair-italic-700 text-2xl mb-6">Select a treatment:</h4>
             {loading ? (
                 <p className="playfair text-primaryContent">Loading...</p>
             ) : (
                 <ul className="grid grid-cols-3 gap-4">
                     {treatments.map((treatment) => (
-                        <li key={treatment.id} className="border border-babyblue p-4">
-                            <h4 className="playfair-700 text-lg mb-1">{treatment.name}</h4>
-                            <p className="playfair text-sm text-primaryContent mb-2">{treatment.description}</p>
-                            <p className="playfair-600 text-tiffanyblue">£{treatment.price}</p>
+                        <li key={treatment.id} className="border border-bluegreen p-4">
+                            <h5 className="playfair-700 text-lg mb-2">{treatment.name}</h5>
+                            <p className="playfair text-md text-primaryContent mb-3">{treatment.description}</p>
+                            <p className="playfair-600 text-lg text-bluegreen">£{treatment.price}</p>
                             <p className="playfair text-sm text-primaryContent">{treatment.duration} minutes</p>
                         </li>
                     ))}

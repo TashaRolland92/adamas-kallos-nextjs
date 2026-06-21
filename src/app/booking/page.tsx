@@ -14,7 +14,7 @@ export default function BookingPage() {
                 <h2 className="playfair-italic-700 text-4xl lg:text-5xl mb-2">Online</h2>
             </Hero>
             <section className="container mx-auto py-10 px-7">
-                <h2 className="text-2xl mb-4 text-center playfair-600 uppercase">Browse our treatments and book yours in just a few clicks...</h2>
+                <h3 className="text-3xl mb-6 playfair-600">Browse our treatments and book yours in just a few clicks...</h3>
                 <TreatmentCategories />
             </section>
         </>

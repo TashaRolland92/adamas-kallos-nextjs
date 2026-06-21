@@ -4,6 +4,7 @@ import { useState, useEffect, useReducer } from "react";
 import CategoryList from "./CategoryList";
 import SubCategoryList from "./SubCategoryList";
 import TreatmentList from "./TreatmentList";
+import Button from "@/components/ui/Button";
 
 type Category = {
     id: number;
@@ -88,23 +89,25 @@ export default function TreatmentCategories() {
     }, []);
 
     return (
-        <div>
+        <div className="booking-container">
             {state.step !== "category" && (
-                <button
+                <Button
                     onClick={() => dispatch({ type: "GO_BACK" })}
-                    className="mb-4 playfair text-primaryContent uppercase text-sm hover:translate-x-1 transition-transform duration-200 inline-block"
+                    variant="blueGreen"
+                    className="mb-4"
                 >
                     ← Back
-                </button>
+                </Button>
             )}
 
             {state.step !== "category" && (
-                <button
+                <Button
                     onClick={() => dispatch({ type: "RESET" })}
-                    className="mb-4 ml-4 playfair text-primaryContent uppercase text-sm hover:translate-x-1 transition-transform duration-200 inline-block"
+                    variant="blueGreen"
+                    className="ml-4 mb-4"
                 >
                     ← Start Again
-                </button>
+                </Button>
             )}
 
             {state.step === "category" && (
