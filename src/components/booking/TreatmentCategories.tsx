@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect, useReducer } from "react";
+import DatePicker from "./DatePicker";
 import CategoryList from "./CategoryList";
 import SubCategoryList from "./SubCategoryList";
 import TreatmentList from "./TreatmentList";
 import Button from "@/components/ui/Button";
+import BookingConfirm from "./BookingConfirm";
 
 type Category = {
     id: number;
@@ -13,13 +15,24 @@ type Category = {
     image_url?: string;
 };
 
-type TreatmentStep = "category" | "subcategory" | "treatment";
+type Treatment = {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    duration: number;
+};
+
+type TreatmentStep = "category" | "subcategory" | "treatment" | "date" | "confirm";
 
 interface TreatmentState {
     step: TreatmentStep;
     selectedCategoryId: number | null;
     selectedSubcategoryId: number | null;
     hasSubCategories: boolean;
+    selectedTreatmentId: number | null;
+    selectedTreatment: Treatment | null;
+    selectedDate: Date | null;
 }
 
 const initialTreatmentState: TreatmentState = {
@@ -27,11 +40,16 @@ const initialTreatmentState: TreatmentState = {
     selectedCategoryId: null,
     selectedSubcategoryId: null,
     hasSubCategories: false,
+    selectedTreatmentId: null,
+    selectedTreatment: null,
+    selectedDate: null,
 };
 
 type TreatmentAction =
     | { type: "SELECT_CATEGORY"; payload: { categoryId: number; hasSubCategories: boolean } }
     | { type: "SELECT_SUBCATEGORY"; payload: { subcategoryId: number } }
+    | { type: "SELECT_TREATMENT"; payload: { treatment: Treatment } }
+    | { type: "SELECT_DATE"; payload: { date: Date } }
     | { type: "GO_BACK" }
     | { type: "RESET" };
 
@@ -51,6 +69,18 @@ const treatmentReducer = (state: TreatmentState, action: TreatmentAction): Treat
                 step: "treatment",
                 selectedSubcategoryId: action.payload.subcategoryId,
             };
+        case "SELECT_TREATMENT":
+            return {
+                ...state,
+                step: "date",
+                selectedTreatment: action.payload.treatment,
+            };
+        case "SELECT_DATE":
+            return {
+                ...state,
+                step: "confirm",
+                selectedDate: action.payload.date,
+            };
         case "GO_BACK":
             switch (state.step) {
                 case "treatment":
@@ -66,6 +96,19 @@ const treatmentReducer = (state: TreatmentState, action: TreatmentAction): Treat
                         selectedCategoryId: null,
                         selectedSubcategoryId: null,
                         hasSubCategories: false,
+                    };
+                case "confirm":
+                    return {
+                        ...state,
+                        step: "date",
+                        selectedDate: null,
+                    };
+                case "date":
+                    return {
+                        ...state,
+                        step: "treatment",
+                        selectedTreatmentId: null,
+                        selectedTreatment: null,
                     };
                 default:
                     return state;
@@ -140,6 +183,30 @@ export default function TreatmentCategories() {
                 <TreatmentList
                     categoryId={state.selectedCategoryId}
                     subcategoryId={state.selectedSubcategoryId}
+                    onSelectTreatment={(treatment) =>
+                        dispatch({
+                            type: "SELECT_TREATMENT",
+                            payload: { treatment },
+                        })
+                    }
+                />
+            )}
+
+            {state.step === "date" && (
+                <DatePicker
+                    onSelectDate={(date) =>
+                        dispatch({
+                            type: "SELECT_DATE",
+                            payload: { date },
+                        })
+                    }
+                />
+            )}
+
+            {state.step === "confirm" && (
+                <BookingConfirm 
+                    treatment={state.selectedTreatment!}
+                    date={state.selectedDate!}
                 />
             )}
         </div>

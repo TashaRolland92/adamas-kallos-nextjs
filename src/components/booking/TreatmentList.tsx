@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Button from "../ui/Button";
+import Button from "@/components/ui/Button";
 
 type Treatment = {
     id: number;
@@ -16,12 +16,14 @@ type Treatment = {
 type TreatmentListProps = {
     categoryId: number;
     subcategoryId: number | null;
+    onSelectTreatment: (treatment: Treatment) => void;
 };
 
-export default function TreatmentList({ categoryId, subcategoryId }: TreatmentListProps) {
+export default function TreatmentList({ categoryId, subcategoryId, onSelectTreatment }: TreatmentListProps) {
     const [treatments, setTreatments] = useState<Treatment[]>([]);
     const [loading, setLoading] = useState(false);
     const [selectedTreatmentId, setSelectedTreatmentId] = useState<number | null>(null);
+    const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
 
     useEffect(() => {
         if (!categoryId) return;
@@ -55,9 +57,15 @@ export default function TreatmentList({ categoryId, subcategoryId }: TreatmentLi
                         {treatments.map((treatment) => (
                             <li 
                                 key={treatment.id} 
-                                onClick={() => setSelectedTreatmentId(
-                                    selectedTreatmentId === treatment.id ? null : treatment.id
-                                )}
+                                onClick={() => {
+                                    if (selectedTreatmentId === treatment.id) {
+                                        setSelectedTreatmentId(null);
+                                        setSelectedTreatment(null);
+                                    } else {
+                                        setSelectedTreatmentId(treatment.id);
+                                        setSelectedTreatment(treatment);
+                                    }
+                                }}
                                 className={`
                                     cursor-pointer 
                                     p-4 
@@ -96,6 +104,7 @@ export default function TreatmentList({ categoryId, subcategoryId }: TreatmentLi
                     <Button
                         variant="blueGreen"             
                         className="min-w-[150]"
+                        onClick={() => selectedTreatment && onSelectTreatment(selectedTreatment)}
                     >
                         Book
                     </Button>                    
