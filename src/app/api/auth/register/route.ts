@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export async function POST(request: Request) {
-    const { email, password, name, phone } = await request.json();
+    const { email, password} = await request.json();
 
-    if (!email || !password || !name) {
+    if (!email || !password) {
         return NextResponse.json(
-            { message: "Name, email and password are required" },
+            { message: "Email and password are required." },
             { status: 400 }
         );
     }
@@ -15,13 +15,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await supabase.auth.signUp({
         email,
-        password,
-        options: {
-            data: {
-                full_name: name,
-                phone,
-            },
-        },
+        password
     });
 
     if (error) {
